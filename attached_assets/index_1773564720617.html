@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>ExamPortal · Complete System</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-theme {
+            background: linear-gradient(135deg, #1a1f2e 0%, #2a2f3f 100%);
+        }
+
+        body.dark-theme .main-app {
+            background: #1e2433;
+        }
+
+        body.dark-theme .top-banner-title,
+        body.dark-theme .top-banner-user {
+            background: #2a2f3f;
+            border-bottom-color: #3a4050;
+        }
+
+        body.dark-theme .username-box {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .message-btn {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .theme-toggle {
+            background: #3a4050;
+            color: #fbbf24;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .logout-btn {
+            background: #dc2626;
+        }
+
+        body.dark-theme .exam-card {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .dept-pill {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .admin-panel {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .admin-tabs {
+            background: #3a4050;
+        }
+
+        body.dark-theme .admin-input {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .user-list {
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .user-item {
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .user-item:hover {
+            background: #3a4050;
+        }
+
+        body.dark-theme .user-name {
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .user-join-date {
+            color: #9ca3af;
+        }
+
+        body.dark-theme .dept-badge {
+            background: #3a4050;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .exam-title {
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .countdown-timer {
+            background: #3a4050;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .login-container {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .auth-tabs {
+            background: #3a4050;
+        }
+
+        body.dark-theme .auth-input {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .remember-me {
+            color: #9ca3af;
+        }
+
+        body.dark-theme .chat-modal {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .chat-messages {
+            background: #1e2433;
+        }
+
+        body.dark-theme .chat-message.received {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .chat-input-area {
+            background: #2a2f3f;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .chat-input {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .user-selector {
+            background: #2a2f3f;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .user-selector label {
+            color: #9ca3af;
+        }
+
+        body.dark-theme .user-select {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .verify-container {
+            background: #2a2f3f;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .verify-input {
+            background: #3a4050;
+            color: #e5e7eb;
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .verify-btn.cancel {
+            background: #3a4050;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .current-file {
+            background: #3a4050;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .file-upload {
+            border-color: #4a5060;
+        }
+
+        body.dark-theme .file-name {
+            color: #9ca3af;
+        }
+
+        body.dark-theme .exam-viewer {
+            background: #1e2433;
+        }
+
+        body.dark-theme .exam-viewer-header {
+            background: #2a2f3f;
+            border-color: #4a5060;
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .exam-viewer-title {
+            color: #e5e7eb;
+        }
+
+        body.dark-theme .exam-control-btn.back {
+            background: #3a4050;
+            color: #e5e7eb;
+        }
+
+        .ai-disclaimer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(245, 158, 11, 0.95);
+            color: white;
+            text-align: center;
+            padding: 6px;
+            font-size: 11px;
+            z-index: 1000;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            width: 90%;
+            max-width: 350px;
+            margin: 80px auto;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease;
+        }
+
+        .login-container.hidden {
+            display: none;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 25px;
+            margin: 0 auto 10px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: #f1f5f9;
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            color: #64748b;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 15px;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .success-message {
+            color: #10b981;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .main-app {
+            position: fixed;
+            top: 32px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #f8fafc;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .main-app.visible {
+            display: block;
+        }
+
+        .top-banner-title {
+            background: white;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-bottom: 1px solid #e2e8f0;
+            width: 100%;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .title-text {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .top-banner-user {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+            width: 100%;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .username-box {
+            background: #f1f5f9;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .username-box i {
+            color: #667eea;
+        }
+
+        .admin-tag {
+            background: #f59e0b;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .message-btn {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .message-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .message-btn i {
+            color: #667eea;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            border: 2px solid white;
+        }
+
+        .theme-toggle {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #475569;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .dept-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 30px;
+        }
+
+        .dept-pill {
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .dept-pill.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Updated Exam Grid - Always 3 columns, scales on mobile */
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin: 0 30px 30px 30px;
+        }
+
+        /* Mobile styles - keep 3 columns but scale down */
+        @media (max-width: 768px) {
+            .exam-grid {
+                gap: 8px;
+                margin: 0 10px 20px 10px;
+            }
+
+            .exam-card {
+                padding: 12px;
+            }
+
+            .dept-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+                margin-bottom: 8px;
+            }
+
+            .exam-title {
+                font-size: 14px;
+                margin-bottom: 6px;
+                line-height: 1.3;
+            }
+
+            .countdown-timer {
+                font-size: 10px;
+                padding: 3px 6px;
+                margin: 5px 0;
+                white-space: nowrap;
+            }
+
+            .start-exam-btn {
+                min-width: 70px;
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            .exam-action-btn {
+                padding: 5px 8px;
+                font-size: 10px;
+            }
+        }
+
+        /* Very small devices */
+        @media (max-width: 480px) {
+            .exam-grid {
+                gap: 5px;
+                margin: 0 5px 15px 5px;
+            }
+
+            .exam-card {
+                padding: 8px;
+            }
+
+            .dept-badge {
+                font-size: 8px;
+                padding: 2px 5px;
+            }
+
+            .exam-title {
+                font-size: 12px;
+                margin-bottom: 4px;
+            }
+
+            .countdown-timer {
+                font-size: 8px;
+                padding: 2px 4px;
+            }
+
+            .start-exam-btn {
+                min-width: 60px;
+                padding: 4px 6px;
+                font-size: 9px;
+            }
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .dept-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #f1f5f9;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #475569;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .exam-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .countdown-timer {
+            font-family: monospace;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            display: inline-block;
+            margin: 10px 0;
+            align-self: flex-start;
+            word-break: keep-all;
+        }
+
+        .countdown-timer.available {
+            background: #10b981;
+            color: white;
+        }
+
+        /* Compact Start Button */
+        .start-exam-btn {
+            width: auto;
+            min-width: 100px;
+            max-width: 150px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 10px;
+            align-self: flex-start;
+            transition: all 0.3s ease;
+        }
+
+        .start-exam-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .start-exam-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #94a3b8;
+        }
+
+        .exam-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .exam-action-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .exam-action-btn.edit {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .exam-action-btn.delete {
+            background: #ef4444;
+            color: white;
+        }
+
+        .exam-action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .admin-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 0 30px 30px 30px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            background: #f1f5f9;
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .admin-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+            color: #64748b;
+        }
+
+        .admin-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .admin-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        .admin-btn.delete {
+            background: #ef4444;
+        }
+
+        .user-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s ease;
+        }
+
+        .user-item:hover {
+            background: #f1f5f9;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar-small {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .user-join-date {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .user-badge {
+            background: #f59e0b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .delete-user-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .delete-user-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        .file-upload {
+            border: 2px dashed #cbd5e1;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .file-name {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .current-file {
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .exam-viewer {
+            position: fixed;
+            top: 32px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .exam-viewer.active {
+            display: flex;
+        }
+
+        .exam-viewer-header {
+            background: white;
+            padding: 15px 30px;
+            border-bottom: 2px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exam-viewer-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 18px;
+        }
+
+        .exam-viewer-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .exam-control-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exam-control-btn.back {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .exam-control-btn.fullscreen {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .exam-frame {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        .chat-modal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 4000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-modal.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+        }
+
+        .chat-header h4 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .user-selector {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        .user-selector label {
+            font-size: 12px;
+            color: #64748b;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .user-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f8fafc;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 10px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        .chat-message.sent {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-message.received {
+            background: white;
+            color: #1e293b;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .message-sender {
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .message-time {
+            font-size: 9px;
+            opacity: 0.7;
+            margin-top: 3px;
+            text-align: right;
+        }
+
+        .chat-input-area {
+            padding: 10px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 8px;
+            background: white;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+        }
+
+        .chat-send-btn {
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .verify-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .verify-modal.active {
+            display: flex;
+        }
+
+        .verify-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .verify-container h3 {
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .verify-container p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .verify-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .verify-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .verify-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .verify-btn.confirm {
+            background: #ef4444;
+            color: white;
+        }
+
+        .verify-btn.cancel {
+            background: #f1f5f9;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-disclaimer">
+        <i class="fas fa-robot"></i> AI-Generated Content - Please verify with official sources
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>ExamPortal</h3>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="loginTab">Login</button>
+            <button class="auth-tab" id="registerTab">Register</button>
+        </div>
+
+        <div class="auth-form active" id="loginForm">
+            <input type="text" id="loginUsername" class="auth-input" placeholder="Username">
+            <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe" checked>
+                <label for="rememberMe">Remember me</label>
+            </div>
+            <div id="loginError" class="error-message"></div>
+            <button class="auth-btn" id="loginBtn">Login</button>
+        </div>
+
+        <div class="auth-form" id="registerForm">
+            <input type="text" id="registerUsername" class="auth-input" placeholder="Choose username">
+            <input type="password" id="registerPassword" class="auth-input" placeholder="Password">
+            <input type="password" id="registerConfirmPassword" class="auth-input" placeholder="Confirm password">
+            <div id="registerError" class="error-message"></div>
+            <div id="registerSuccess" class="success-message"></div>
+            <button class="auth-btn" id="registerBtn">Register</button>
+        </div>
+    </div>
+
+    <div class="verify-modal" id="verifyModal">
+        <div class="verify-container">
+            <h3>🔐 Verify Admin</h3>
+            <p id="verifyMessage">Enter admin password</p>
+            <input type="password" id="verifyPassword" class="verify-input" placeholder="Enter password">
+            <div class="verify-buttons">
+                <button class="verify-btn confirm" id="verifyConfirm">Confirm</button>
+                <button class="verify-btn cancel" id="verifyCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-viewer" id="examViewer">
+        <div class="exam-viewer-header">
+            <div class="exam-viewer-title" id="examViewerTitle">Exam Title</div>
+            <div class="exam-viewer-controls">
+                <button class="exam-control-btn back" id="backFromExam">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="exam-control-btn fullscreen" id="fullscreenExam">
+                    <i class="fas fa-expand"></i> Fullscreen
+                </button>
+            </div>
+        </div>
+        <iframe class="exam-frame" id="examFrame" sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-modals"></iframe>
+    </div>
+
+    <div class="main-app" id="mainApp">
+        <div class="top-banner-title">
+            <span class="title-text">ExamPortal</span>
+        </div>
+
+        <div class="top-banner-user">
+            <div class="user-section">
+                <div class="username-box">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="displayName">User</span>
+                    <span class="admin-tag" id="adminTag" style="display: none;">Admin</span>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="message-btn" id="chatBtn">
+                    <i class="fas fa-comment"></i> Message
+                    <span class="notification-badge" id="messageBadge" style="display: none;">0</span>
+                </button>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="admin-panel" id="adminPanel" style="display: none;">
+            <div style="margin-bottom: 15px;">
+                <h4>Admin Dashboard</h4>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="users">Users</button>
+                <button class="admin-tab" data-tab="depts">Departments</button>
+                <button class="admin-tab" data-tab="exams">Exams</button>
+            </div>
+
+            <div class="admin-section active" id="usersSection">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h5>Users</h5>
+                    <span style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 5px 15px; border-radius: 30px; font-weight: 600; font-size: 14px;">
+                        <i class="fas fa-users" style="margin-right: 5px;"></i> <span id="userCount">0</span>
+                    </span>
+                </div>
+                <div class="user-list" id="usersList"></div>
+            </div>
+
+            <div class="admin-section" id="deptsSection">
+                <h5>Manage Departments</h5>
+                <div style="display: flex; gap: 5px; margin: 10px 0;">
+                    <input type="text" id="newDept" class="admin-input" placeholder="New department">
+                    <button id="addDept" class="admin-btn">Add</button>
+                </div>
+                <div class="dept-list" id="deptsList"></div>
+            </div>
+
+            <div class="admin-section" id="examsSection">
+                <h5>Post Exam</h5>
+                <input type="hidden" id="editExamId">
+                
+                <input type="text" id="examTitle" class="admin-input" placeholder="Exam title">
+                
+                <select id="examDept" class="admin-input">
+                    <option value="">Select department</option>
+                </select>
+                
+                <input type="number" id="countdownTime" class="admin-input" placeholder="Countdown (seconds)" min="0">
+                
+                <div id="currentFileInfo" class="current-file" style="display: none;">
+                    <i class="fas fa-file-code"></i> <span id="currentFileName"></span>
+                </div>
+                
+                <input type="file" id="fileInput" accept=".html" style="display: none;">
+                <div class="file-upload" id="fileDrop">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click or drag HTML file</p>
+                    <p class="file-name" id="fileName">No file selected</p>
+                </div>
+                
+                <button id="saveExam" class="admin-btn">Post Exam</button>
+            </div>
+        </div>
+
+        <div class="dept-pills" id="deptPills"></div>
+        <div class="exam-grid" id="examGrid"></div>
+    </div>
+
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header" id="chatHeader">
+            <h4><i class="fas fa-comment"></i> Messages</h4>
+            <button class="close-chat" id="closeChat">✕</button>
+        </div>
+        
+        <div class="user-selector" id="userSelector" style="display: none;">
+            <label>Select user:</label>
+            <select id="userSelect" class="user-select">
+                <option value="">Choose user...</option>
+            </select>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type message...">
+            <button class="chat-send-btn" id="sendMessage">Send</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const ADMIN_USER = 'Admin';
+            const ADMIN_PASS = 'cotm2018';
+            
+            // Load data
+            let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+            let allMessages = JSON.parse(localStorage.getItem('allMessages')) || [];
+            let departments = JSON.parse(localStorage.getItem('departments')) || ['Computer Science', 'Engineering', 'Business', 'Medicine', 'Arts'];
+            let exams = JSON.parse(localStorage.getItem('exams')) || [];
+            
+            // Current user
+            let currentUser = localStorage.getItem('currentUser') || null;
+            let isAdmin = currentUser === ADMIN_USER;
+            let darkMode = localStorage.getItem('darkMode') === 'true';
+            let countdownIntervals = {};
+            let pendingDeleteAction = null;
+
+            // DOM Elements
+            const loginContainer = document.getElementById('loginContainer');
+            const mainApp = document.getElementById('mainApp');
+            const examViewer = document.getElementById('examViewer');
+            const examFrame = document.getElementById('examFrame');
+            const chatModal = document.getElementById('chatModal');
+            const verifyModal = document.getElementById('verifyModal');
+            const messageBadge = document.getElementById('messageBadge');
+            const displayName = document.getElementById('displayName');
+            const adminTag = document.getElementById('adminTag');
+            const userSelect = document.getElementById('userSelect');
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            // Theme
+            function setTheme(isDark) {
+                if (isDark) {
+                    document.body.classList.add('dark-theme');
+                    themeIcon.className = 'fas fa-sun';
+                    localStorage.setItem('darkMode', 'true');
+                } else {
+                    document.body.classList.remove('dark-theme');
+                    themeIcon.className = 'fas fa-moon';
+                    localStorage.setItem('darkMode', 'false');
+                }
+            }
+            setTheme(darkMode);
+            themeToggle.addEventListener('click', () => {
+                darkMode = !darkMode;
+                setTheme(darkMode);
+            });
+
+            // Auto login
+            if (currentUser) {
+                if (!isAdmin) {
+                    const userExists = registeredUsers.some(u => u.username === currentUser);
+                    if (!userExists) currentUser = null;
+                }
+            }
+
+            if (currentUser) {
+                loginContainer.classList.add('hidden');
+                mainApp.classList.add('visible');
+                updateUI();
+                updateNotificationBadge();
+            }
+
+            // Tab switching
+            document.getElementById('loginTab').addEventListener('click', () => {
+                document.getElementById('loginTab').classList.add('active');
+                document.getElementById('registerTab').classList.remove('active');
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('registerForm').classList.remove('active');
+            });
+
+            document.getElementById('registerTab').addEventListener('click', () => {
+                document.getElementById('registerTab').classList.add('active');
+                document.getElementById('loginTab').classList.remove('active');
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('loginForm').classList.remove('active');
+            });
+
+            // Login
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const username = document.getElementById('loginUsername').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+                const remember = document.getElementById('rememberMe').checked;
+                
+                if (!username || !password) {
+                    document.getElementById('loginError').textContent = 'Enter username and password';
+                    return;
+                }
+                
+                // Admin login
+                if (username === ADMIN_USER && password === ADMIN_PASS) {
+                    currentUser = ADMIN_USER;
+                    isAdmin = true;
+                    if (remember) localStorage.setItem('currentUser', ADMIN_USER);
+                    loginContainer.classList.add('hidden');
+                    mainApp.classList.add('visible');
+                    updateUI();
+                    updateNotificationBadge();
+                    return;
+                }
+                
+                // User login
+                const user = registeredUsers.find(u => u.username === username);
+                if (user && user.password === password) {
+                    currentUser = username;
+                    isAdmin = false;
+                    if (remember) localStorage.setItem('currentUser', username);
+                    loginContainer.classList.add('hidden');
+                    mainApp.classList.add('visible');
+                    updateUI();
+                    updateNotificationBadge();
+                } else {
+                    document.getElementById('loginError').textContent = 'Invalid credentials';
+                }
+            });
+
+            // Register
+            document.getElementById('registerBtn').addEventListener('click', () => {
+                const username = document.getElementById('registerUsername').value.trim();
+                const password = document.getElementById('registerPassword').value.trim();
+                const confirm = document.getElementById('registerConfirmPassword').value.trim();
+                
+                document.getElementById('registerError').textContent = '';
+                document.getElementById('registerSuccess').textContent = '';
+                
+                if (!username || !password || !confirm) {
+                    document.getElementById('registerError').textContent = 'Fill all fields';
+                    return;
+                }
+                
+                if (username.length < 3) {
+                    document.getElementById('registerError').textContent = 'Username too short';
+                    return;
+                }
+                
+                if (password.length < 4) {
+                    document.getElementById('registerError').textContent = 'Password too short';
+                    return;
+                }
+                
+                if (password !== confirm) {
+                    document.getElementById('registerError').textContent = 'Passwords do not match';
+                    return;
+                }
+                
+                if (username === ADMIN_USER) {
+                    document.getElementById('registerError').textContent = 'Username taken';
+                    return;
+                }
+                
+                if (registeredUsers.some(u => u.username === username)) {
+                    document.getElementById('registerError').textContent = 'Username exists';
+                    return;
+                }
+                
+                const regularUsers = registeredUsers.filter(u => u.username !== ADMIN_USER);
+                if (regularUsers.length >= 3) {
+                    document.getElementById('registerError').innerHTML = '⚠️ <strong>Maximum 3 registrations per device</strong><br>This phone has reached the limit';
+                    return;
+                }
+                
+                registeredUsers.push({ 
+                    username, 
+                    password,
+                    joinDate: new Date().toLocaleDateString()
+                });
+                localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+                
+                document.getElementById('registerSuccess').textContent = '✅ Registration successful! Please login.';
+                
+                setTimeout(() => {
+                    document.getElementById('registerUsername').value = '';
+                    document.getElementById('registerPassword').value = '';
+                    document.getElementById('registerConfirmPassword').value = '';
+                    document.getElementById('loginTab').click();
+                }, 1500);
+            });
+
+            // Notification badge
+            function updateNotificationBadge() {
+                if (!currentUser) return;
+                const unread = allMessages.filter(m => m.receiver === currentUser && !m.read).length;
+                if (unread > 0) {
+                    messageBadge.textContent = unread;
+                    messageBadge.style.display = 'flex';
+                } else {
+                    messageBadge.style.display = 'none';
+                }
+            }
+
+            // Chat
+            document.getElementById('chatBtn').addEventListener('click', () => {
+                if (isAdmin) {
+                    document.getElementById('userSelector').style.display = 'block';
+                    loadUsersForChat();
+                } else {
+                    document.getElementById('userSelector').style.display = 'none';
+                }
+                loadChatMessages();
+                chatModal.classList.add('active');
+                allMessages.forEach(msg => { if (msg.receiver === currentUser) msg.read = true; });
+                localStorage.setItem('allMessages', JSON.stringify(allMessages));
+                updateNotificationBadge();
+            });
+
+            function loadUsersForChat() {
+                const regularUsers = registeredUsers.filter(u => u.username !== ADMIN_USER);
+                const senders = [...new Set(allMessages.filter(m => m.sender !== ADMIN_USER).map(m => m.sender))];
+                const allPossibleUsers = [...new Set([...senders, ...regularUsers.map(u => u.username)])];
+                userSelect.innerHTML = '<option value="">Choose user...</option>' +
+                    allPossibleUsers.map(s => `<option value="${s}">${s}</option>`).join('');
+                userSelect.onchange = loadChatMessages;
+            }
+
+            document.getElementById('closeChat').addEventListener('click', () => {
+                chatModal.classList.remove('active');
+            });
+
+            document.getElementById('sendMessage').addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+            function sendMessage() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                let receiver;
+                if (isAdmin) {
+                    receiver = userSelect.value;
+                    if (!receiver) { alert('Select a user'); return; }
+                } else {
+                    receiver = ADMIN_USER;
+                }
+                allMessages.push({
+                    id: Date.now(),
+                    sender: currentUser,
+                    receiver: receiver,
+                    text: text,
+                    time: new Date().toLocaleTimeString(),
+                    read: false
+                });
+                localStorage.setItem('allMessages', JSON.stringify(allMessages));
+                chatInput.value = '';
+                loadChatMessages();
+                updateNotificationBadge();
+            }
+
+            function loadChatMessages() {
+                let messages = [];
+                if (isAdmin) {
+                    const selected = userSelect.value;
+                    if (!selected) {
+                        chatMessages.innerHTML = '<div style="text-align: center; padding: 20px;">Select a user</div>';
+                        return;
+                    }
+                    messages = allMessages.filter(m => 
+                        (m.sender === ADMIN_USER && m.receiver === selected) ||
+                        (m.sender === selected && m.receiver === ADMIN_USER)
+                    );
+                } else {
+                    messages = allMessages.filter(m => 
+                        (m.sender === currentUser && m.receiver === ADMIN_USER) ||
+                        (m.sender === ADMIN_USER && m.receiver === currentUser)
+                    );
+                }
+                if (messages.length === 0) {
+                    chatMessages.innerHTML = '<div style="text-align: center; padding: 20px;">No messages</div>';
+                    return;
+                }
+                chatMessages.innerHTML = messages.map(msg => {
+                    const isSent = msg.sender === currentUser;
+                    return `
+                        <div class="chat-message ${isSent ? 'sent' : 'received'}">
+                            <div class="message-sender">${isSent ? 'You' : msg.sender}</div>
+                            <div>${msg.text}</div>
+                            <div class="message-time">${msg.time}</div>
+                        </div>
+                    `;
+                }).join('');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Countdown functions
+            function formatCountdown(seconds) {
+                if (seconds <= 0) return 'Available Now';
+                const h = Math.floor(seconds / 3600);
+                const m = Math.floor((seconds % 3600) / 60);
+                const s = seconds % 60;
+                return `⏰ ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            }
+
+            function startCountdown(examId) {
+                if (countdownIntervals[examId]) clearInterval(countdownIntervals[examId]);
+                countdownIntervals[examId] = setInterval(() => {
+                    const exam = exams.find(e => e.id === examId);
+                    if (!exam) { clearInterval(countdownIntervals[examId]); return; }
+                    if (exam.countdown <= 0) { 
+                        clearInterval(countdownIntervals[examId]); 
+                        renderExams(); 
+                        return; 
+                    }
+                    exam.countdown -= 1;
+                    localStorage.setItem('exams', JSON.stringify(exams));
+                    const el = document.getElementById(`countdown-${examId}`);
+                    if (el) {
+                        if (exam.countdown <= 0) {
+                            el.innerHTML = '<i class="fas fa-check-circle"></i> Available Now';
+                            el.className = 'countdown-timer available';
+                        } else {
+                            el.innerHTML = `<i class="fas fa-hourglass-half"></i> ${formatCountdown(exam.countdown)}`;
+                        }
+                    }
+                }, 1000);
+            }
+
+            // Verify modal
+            function showVerifyModal(message, action) {
+                document.getElementById('verifyMessage').textContent = message;
+                pendingDeleteAction = action;
+                verifyModal.classList.add('active');
+                document.getElementById('verifyPassword').value = '';
+            }
+
+            document.getElementById('verifyConfirm').addEventListener('click', () => {
+                const pwd = document.getElementById('verifyPassword').value;
+                if (pwd === ADMIN_PASS) {
+                    if (pendingDeleteAction) pendingDeleteAction();
+                    verifyModal.classList.remove('active');
+                } else {
+                    alert('Wrong password');
+                }
+            });
+
+            document.getElementById('verifyCancel').addEventListener('click', () => {
+                verifyModal.classList.remove('active');
+                pendingDeleteAction = null;
+            });
+
+            // Render exams - FIXED: Now shows ALL exams to ALL users
+            function renderExams() {
+                const grid = document.getElementById('examGrid');
+                const activeDept = document.querySelector('.dept-pill.active')?.dataset.dept || 'all';
+                
+                // Show ALL exams - no filtering by user
+                const filtered = exams.filter(e => activeDept === 'all' || e.department === activeDept);
+                
+                if (filtered.length === 0) {
+                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px;">No exams available</div>';
+                    return;
+                }
+                
+                grid.innerHTML = filtered.map(exam => {
+                    const available = exam.countdown <= 0;
+                    return `
+                        <div class="exam-card">
+                            <span class="dept-badge">${exam.department}</span>
+                            <div class="exam-title">${exam.title}</div>
+                            <div class="countdown-timer ${available ? 'available' : ''}" id="countdown-${exam.id}">
+                                <i class="fas ${available ? 'fa-check-circle' : 'fa-hourglass-half'}"></i>
+                                ${available ? 'Available Now' : formatCountdown(exam.countdown)}
+                            </div>
+                            ${isAdmin ? `
+                                <div class="exam-actions">
+                                    <button class="exam-action-btn edit" onclick="editExam(${exam.id})">Edit</button>
+                                    <button class="exam-action-btn delete" onclick="deleteExam(${exam.id})">Delete</button>
+                                </div>
+                            ` : `
+                                <button class="start-exam-btn" onclick="startExam(${exam.id})" ${!available ? 'disabled' : ''}>
+                                    ${available ? 'Start' : 'Locked'}
+                                </button>
+                            `}
+                        </div>
+                    `;
+                }).join('');
+                
+                // Start countdown for exams that need it
+                exams.forEach(exam => { 
+                    if (exam.countdown > 0) startCountdown(exam.id); 
+                });
+            }
+
+            // Start exam
+            window.startExam = function(id) {
+                const exam = exams.find(e => e.id === id);
+                if (exam && exam.countdown <= 0) {
+                    document.getElementById('examViewerTitle').textContent = exam.title;
+                    document.getElementById('examFrame').srcdoc = exam.content || '<h1>No content</h1>';
+                    examViewer.classList.add('active');
+                }
+            };
+
+            // Back from exam
+            document.getElementById('backFromExam').addEventListener('click', () => {
+                examViewer.classList.remove('active');
+                examFrame.srcdoc = '';
+                if (document.fullscreenElement) document.exitFullscreen();
+            });
+
+            // Fullscreen
+            document.getElementById('fullscreenExam').addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    examViewer.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            // Edit exam
+            window.editExam = function(id) {
+                const exam = exams.find(e => e.id === id);
+                document.getElementById('editExamId').value = id;
+                document.getElementById('examTitle').value = exam.title;
+                document.getElementById('examDept').value = exam.department;
+                document.getElementById('countdownTime').value = exam.countdown;
+                if (exam.fileName) {
+                    document.getElementById('currentFileInfo').style.display = 'block';
+                    document.getElementById('currentFileName').textContent = `Current: ${exam.fileName}`;
+                } else {
+                    document.getElementById('currentFileInfo').style.display = 'none';
+                }
+                document.querySelector('[data-tab="exams"]').click();
+            };
+
+            // Delete exam
+            window.deleteExam = function(id) {
+                showVerifyModal('Delete this exam?', () => {
+                    exams = exams.filter(e => e.id !== id);
+                    localStorage.setItem('exams', JSON.stringify(exams));
+                    renderExams();
+                });
+            };
+
+            // File upload
+            const fileDrop = document.getElementById('fileDrop');
+            const fileInput = document.getElementById('fileInput');
+            let selectedFile = null;
+
+            fileDrop.addEventListener('click', () => fileInput.click());
+            fileDrop.addEventListener('dragover', (e) => { e.preventDefault(); fileDrop.style.background = '#f1f5f9'; });
+            fileDrop.addEventListener('dragleave', () => { fileDrop.style.background = ''; });
+            fileDrop.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileDrop.style.background = '';
+                const file = e.dataTransfer.files[0];
+                if (file && file.name.endsWith('.html')) handleFile(file);
+                else alert('HTML file only');
+            });
+            fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+            function handleFile(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    selectedFile = {
+                        name: file.name,
+                        content: e.target.result
+                    };
+                    document.getElementById('fileName').innerHTML = `<i class="fas fa-check-circle"></i> ${file.name}`;
+                };
+                reader.readAsText(file);
+            }
+
+            // Save exam
+            document.getElementById('saveExam').addEventListener('click', () => {
+                const title = document.getElementById('examTitle').value.trim();
+                const dept = document.getElementById('examDept').value;
+                const countdown = parseInt(document.getElementById('countdownTime').value) || 0;
+                const editId = document.getElementById('editExamId').value;
+
+                if (!title || !dept) { alert('Fill all fields'); return; }
+                if (!selectedFile && !editId) { alert('Select a file'); return; }
+
+                if (editId) {
+                    // Edit existing
+                    const index = exams.findIndex(e => e.id == editId);
+                    exams[index].title = title;
+                    exams[index].department = dept;
+                    exams[index].countdown = countdown;
+                    if (selectedFile) {
+                        exams[index].content = selectedFile.content;
+                        exams[index].fileName = selectedFile.name;
+                    }
+                } else {
+                    // Create new
+                    exams.push({
+                        id: Date.now(),
+                        title,
+                        department: dept,
+                        countdown,
+                        fileName: selectedFile.name,
+                        content: selectedFile.content
+                    });
+                }
+
+                localStorage.setItem('exams', JSON.stringify(exams));
+                
+                // Reset form
+                document.getElementById('examTitle').value = '';
+                document.getElementById('examDept').value = '';
+                document.getElementById('countdownTime').value = '';
+                document.getElementById('fileName').innerHTML = 'No file selected';
+                document.getElementById('currentFileInfo').style.display = 'none';
+                document.getElementById('editExamId').value = '';
+                selectedFile = null;
+                
+                renderExams();
+            });
+
+            // Admin functions
+            function updateAdminData() {
+                document.getElementById('userCount').textContent = registeredUsers.length;
+                
+                const usersList = document.getElementById('usersList');
+                if (registeredUsers.length === 0) {
+                    usersList.innerHTML = '<div style="text-align: center; padding: 20px; color: #64748b;">No users registered</div>';
+                    return;
+                }
+                
+                usersList.innerHTML = registeredUsers.map((user, index) => {
+                    const firstLetter = user.username.charAt(0).toUpperCase();
+                    const isAdminUser = user.username === ADMIN_USER;
+                    return `
+                        <div class="user-item">
+                            <div class="user-info">
+                                <div class="user-avatar-small">${firstLetter}</div>
+                                <div class="user-details">
+                                    <div>
+                                        <span class="user-name">${user.username}</span>
+                                        ${isAdminUser ? '<span class="user-badge">Admin</span>' : ''}
+                                    </div>
+                                    <div class="user-join-date">Joined: ${user.joinDate || 'Recently'}</div>
+                                </div>
+                            </div>
+                            ${!isAdminUser ? `
+                                <button class="delete-user-btn" onclick="deleteUser('${user.username}')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                const deptsList = document.getElementById('deptsList');
+                deptsList.innerHTML = departments.map(dept => `
+                    <div class="dept-item">
+                        <span>${dept}</span>
+                        <button class="admin-btn delete" onclick="deleteDept('${dept}')">Delete</button>
+                    </div>
+                `).join('');
+            }
+
+            window.deleteUser = function(username) {
+                showVerifyModal(`Delete user "${username}"?`, () => {
+                    registeredUsers = registeredUsers.filter(u => u.username !== username);
+                    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+                    updateAdminData();
+                });
+            };
+
+            window.deleteDept = function(dept) {
+                showVerifyModal(`Delete department "${dept}"?`, () => {
+                    departments = departments.filter(d => d !== dept);
+                    localStorage.setItem('departments', JSON.stringify(departments));
+                    updateAdminData();
+                    updateDeptPills();
+                    updateExamSelect();
+                });
+            };
+
+            document.getElementById('addDept').addEventListener('click', () => {
+                const newDept = document.getElementById('newDept').value.trim();
+                if (newDept && !departments.includes(newDept)) {
+                    departments.push(newDept);
+                    localStorage.setItem('departments', JSON.stringify(departments));
+                    updateAdminData();
+                    updateDeptPills();
+                    updateExamSelect();
+                    document.getElementById('newDept').value = '';
+                }
+            });
+
+            // UI Updates
+            function updateUI() {
+                displayName.textContent = currentUser;
+                if (isAdmin) {
+                    adminTag.style.display = 'inline-block';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    updateAdminData();
+                } else {
+                    adminTag.style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'none';
+                }
+                updateDeptPills();
+                renderExams();
+                updateExamSelect();
+            }
+
+            function updateDeptPills() {
+                const pills = document.getElementById('deptPills');
+                pills.innerHTML = '<button class="dept-pill active" data-dept="all">All</button>' +
+                    departments.map(d => `<button class="dept-pill" data-dept="${d}">${d}</button>`).join('');
+                document.querySelectorAll('.dept-pill').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.dept-pill').forEach(p => p.classList.remove('active'));
+                        btn.classList.add('active');
+                        renderExams();
+                    });
+                });
+            }
+
+            function updateExamSelect() {
+                const select = document.getElementById('examDept');
+                select.innerHTML = '<option value="">Select</option>' +
+                    departments.map(d => `<option value="${d}">${d}</option>`).join('');
+            }
+
+            // Admin tabs
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab + 'Section').classList.add('active');
+                });
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                currentUser = null;
+                isAdmin = false;
+                localStorage.removeItem('currentUser');
+                loginContainer.classList.remove('hidden');
+                mainApp.classList.remove('visible');
+                Object.values(countdownIntervals).forEach(clearInterval);
+            });
+
+            // Draggable chat
+            const chatHeader = document.getElementById('chatHeader');
+            let isDragging = false, offsetX, offsetY;
+            chatHeader.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.clientX - chatModal.offsetLeft;
+                offsetY = e.clientY - chatModal.offsetTop;
+                chatModal.style.transition = 'none';
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    chatModal.style.left = (e.clientX - offsetX) + 'px';
+                    chatModal.style.top = (e.clientY - offsetY) + 'px';
+                    chatModal.style.right = 'auto';
+                    chatModal.style.bottom = 'auto';
+                }
+            });
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                chatModal.style.transition = '';
+            });
+
+            // Check notifications every 2 seconds
+            setInterval(updateNotificationBadge, 2000);
+
+            // Initialize
+            updateDeptPills();
+            renderExams();
+        })();
+    </script>
+</body>
+</html>
